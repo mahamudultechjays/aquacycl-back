@@ -1,0 +1,32 @@
+[
+    {
+      "model": "users.usertype",
+      "pk": 1,
+      "fields": {
+        "name": "Admin",
+        "is_active": true,
+        "created_on": "2023-06-12T00:00:00Z",
+        "updated_on": "2023-06-12T00:00:00Z"
+      }
+    },
+    {
+      "model": "users.usertype",
+      "pk": 2,
+      "fields": {
+        "name": "Staff",
+        "is_active": true,
+        "created_on": "2023-06-12T00:00:00Z",
+        "updated_on": "2023-06-12T00:00:00Z"
+      }
+    },
+    {
+      "model": "users.usertype",
+      "pk": 3,
+      "fields": {
+        "name": "Customer",
+        "is_active": true,
+        "created_on": "2023-06-12T00:00:00Z",
+        "updated_on": "2023-06-12T00:00:00Z"
+      }
+    }
+]
