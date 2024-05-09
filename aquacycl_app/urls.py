@@ -13,4 +13,9 @@ urlpatterns = [
         views.ManifestHistory.as_view(),
         name="manifest_history",
     ),
+    path(
+        "fetched/data/",
+        views.FetchDataView.as_view(),
+        name="fetched_data",
+    )
 ]

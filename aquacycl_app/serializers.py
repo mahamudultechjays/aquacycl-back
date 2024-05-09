@@ -45,3 +45,9 @@ class ManifestHistorySerializer(serializers.ModelSerializer):
             "site_name",
             "manifest_name",
         ]
+
+
+class FetchSnowflakeDataSerializer(serializers.Serializer):
+    customer = serializers.CharField()
+    site_name = serializers.CharField()
+    plant = serializers.CharField()

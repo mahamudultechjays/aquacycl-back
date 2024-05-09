@@ -3,7 +3,7 @@ from rest_framework import response, status, views
 
 from aquacycl_app import controllers, serializers
 from aquacycl_project import constants
-from tj_packages import custom_pagination
+from tj_packages import custom_pagination, snowflake_data
 from users import controllers as user_controllers
 
 User = auth.get_user_model()
@@ -322,6 +322,35 @@ class ManifestHistory(views.APIView):
                 "version_history_count": site_manifest_version_history_objects.count(),
                 "next_link": next_link,
                 "data": serialized_data,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class FetchDataView(views.APIView):
+    """
+    API endpoint to fetch data from snowflake.
+    """
+
+    def post(self, request, *args, **kwargs):
+        serializer = serializers.FetchSnowflakeDataSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        customer = data.get("customer", "")
+        site_name = data.get("site_name", "")
+        plant = data.get("plant", "")
+        results = snowflake_data.fetch_snowflake_data(customer, site_name, plant)
+        if not results:
+            return response.Response(
+                {
+                   "message": "no data found",
+                },
+                status=status.HTTP_200_OK
+            )
+        return response.Response(
+            {
+                "message": "successful",
+                "data": results
             },
             status=status.HTTP_200_OK,
         )
